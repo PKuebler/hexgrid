@@ -26,7 +26,7 @@ import (
 //                   *         *
 //                    *********
 //
-var defaultLayout = layout{size: point{100, 100}, origin: point{0, 0}, orientation: orientationFlat}
+var defaultLayout = Layout{Size: Point{100, 100}, Origin: Point{0, 0}, Orientation: OrientationFlat}
 
 // utility functions
 func round(num float64) int {
@@ -54,7 +54,7 @@ func TestHexToPixel(t *testing.T) {
 
 		pixel := HexToPixel(defaultLayout, tt.hexA)
 
-		actual := fmt.Sprintf("%.1f;%.1f", pixel.x, pixel.y)
+		actual := fmt.Sprintf("%.1f;%.1f", pixel.X, pixel.Y)
 
 		if actual != tt.expected {
 			t.Error("Expected:", tt.expected, "got:", actual)
@@ -65,17 +65,17 @@ func TestHexToPixel(t *testing.T) {
 func TestPixelToHex(t *testing.T) {
 
 	var testCases = []struct {
-		point    point
+		Point    Point
 		expected hex
 	}{
-		{point{0, 0}, NewHex(0, 0)},
-		{point{150, 87}, NewHex(1, 0)},
-		{point{300, 10}, NewHex(2, -1)},
+		{Point{0, 0}, NewHex(0, 0)},
+		{Point{150, 87}, NewHex(1, 0)},
+		{Point{300, 10}, NewHex(2, -1)},
 	}
 
 	for _, tt := range testCases {
 
-		actual := PixelToHex(defaultLayout, tt.point).Round()
+		actual := PixelToHex(defaultLayout, tt.Point).Round()
 
 		if actual != tt.expected {
 			t.Error("Expected:", tt.expected, "got:", actual)
@@ -118,8 +118,8 @@ func TestHexagonCorners(t *testing.T) {
 
 	for i := 0; i < len(corners); i++ {
 
-		actualX := toFixed(corners[i].x, 1)
-		actualY := toFixed(corners[i].y, 1)
+		actualX := toFixed(corners[i].X, 1)
+		actualY := toFixed(corners[i].Y, 1)
 		expectedX := testCase[i].roundedX
 		expectedY := testCase[i].roundedY
 
