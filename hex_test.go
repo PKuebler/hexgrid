@@ -8,9 +8,9 @@ import (
 func TestHexAdd(t *testing.T) {
 
 	var testCases = []struct {
-		hexA     hex
-		hexB     hex
-		expected hex
+		hexA     Hex
+		hexB     Hex
+		expected Hex
 	}{
 		{NewHex(1, -3), NewHex(3, -7), NewHex(4, -10)},
 	}
@@ -28,9 +28,9 @@ func TestHexAdd(t *testing.T) {
 func TestHexSubtract(t *testing.T) {
 
 	var testCases = []struct {
-		hexA     hex
-		hexB     hex
-		expected hex
+		hexA     Hex
+		hexB     Hex
+		expected Hex
 	}{
 		{NewHex(1, -3), NewHex(3, -7), NewHex(-2, 4)},
 	}
@@ -48,9 +48,9 @@ func TestHexSubtract(t *testing.T) {
 func TestHexScale(t *testing.T) {
 
 	var testCases = []struct {
-		hexA     hex
+		hexA     Hex
 		factor   int
-		expected hex
+		expected Hex
 	}{
 		{NewHex(1, -3), 2, NewHex(2, -6)},
 		{NewHex(-2, 3), 2, NewHex(-4, 6)},
@@ -84,9 +84,9 @@ func TestHexScale(t *testing.T) {
 func TestHexNeighbor(t *testing.T) {
 
 	var testCases = []struct {
-		origin    hex
+		origin    Hex
 		direction direction
-		expected  hex
+		expected  Hex
 	}{
 
 		{NewHex(0, -1), directionSE, NewHex(1, -1)},
@@ -130,8 +130,8 @@ func TestHexNeighbor(t *testing.T) {
 func TestHexDistance(t *testing.T) {
 
 	var testCases = []struct {
-		origin      hex
-		destination hex
+		origin      Hex
+		destination Hex
 		expected    int
 	}{
 		{NewHex(-1, -1), NewHex(1, -1), 2},
@@ -169,8 +169,8 @@ func TestHexDistance(t *testing.T) {
 func TestHexLineDraw(t *testing.T) {
 
 	var testCases = []struct {
-		origin      hex
-		destination hex
+		origin      Hex
+		destination Hex
 		expected    string // the expected path serialized to string
 	}{
 		{NewHex(-3, -1), NewHex(3, -3), "[(-3,-1) (-2,-1) (-1,-2) (0,-2) (1,-2) (2,-3) (3,-3)]"},
@@ -276,7 +276,7 @@ func TestHexRectangle(t *testing.T) {
 // The hexagons marked with an X are non-visible. The remaining 16 are visible.
 func TestHexFieldOfView(t *testing.T) {
 
-	universe := []hex{
+	universe := []Hex{
 		NewHex(0, 0),
 		NewHex(0, 1),
 		NewHex(0, 2),
@@ -303,7 +303,7 @@ func TestHexFieldOfView(t *testing.T) {
 		NewHex(5, 1),
 	}
 
-	losBlockers := []hex{NewHex(2, 0), NewHex(3, 0)}
+	losBlockers := []Hex{NewHex(2, 0), NewHex(3, 0)}
 
 	actual := HexFieldOfView(NewHex(1, 1), universe, losBlockers)
 
@@ -319,7 +319,7 @@ func TestHexFieldOfView(t *testing.T) {
 func BenchmarkHexDistance(b *testing.B) {
 
 	var testCases = []struct {
-		destination hex
+		destination Hex
 	}{
 		{NewHex(0, 0)},
 		{NewHex(100, 100)},
@@ -341,7 +341,7 @@ func BenchmarkHexDistance(b *testing.B) {
 func BenchmarkHexLineDraw(b *testing.B) {
 
 	var testCases = []struct {
-		destination hex
+		destination Hex
 	}{
 		{NewHex(0, 0)},
 		{NewHex(100, 100)},
@@ -385,6 +385,6 @@ func BenchmarkHexRange(b *testing.B) {
 func BenchmarkHexHasLineOfSight(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
-		HexHasLineOfSight(NewHex(1, 1), NewHex(4, -1), []hex{NewHex(2, 0), NewHex(3, 0)})
+		HexHasLineOfSight(NewHex(1, 1), NewHex(4, -1), []Hex{NewHex(2, 0), NewHex(3, 0)})
 	}
 }

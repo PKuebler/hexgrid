@@ -22,7 +22,7 @@ var OrientationPointy Orientation = Orientation{math.Sqrt(3.), math.Sqrt(3.) / 2
 var OrientationFlat Orientation = Orientation{3. / 2., 0., math.Sqrt(3.) / 2., math.Sqrt(3.), 2. / 3., 0., -1. / 3., math.Sqrt(3.) / 3., 0.}
 
 // HexToPixel returns the center pixel for a given hexagon an a certain layout
-func HexToPixel(l Layout, h hex) Point {
+func HexToPixel(l Layout, h Hex) Point {
 
 	M := l.Orientation
 	size := l.Size
@@ -54,7 +54,7 @@ func HexCornerOffset(l Layout, c int) Point {
 }
 
 // Gets the corners of the hexagon for the given layout, starting at the E vertex and proceeding in a CCW order
-func HexagonCorners(l Layout, h hex) []Point {
+func HexagonCorners(l Layout, h Hex) []Point {
 
 	corners := make([]Point, 0)
 	center := HexToPixel(l, h)
