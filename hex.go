@@ -51,14 +51,28 @@ type Hex struct {
 }
 
 func NewHex(q, r int) Hex {
-
 	h := Hex{q: q, r: r, s: -q - r}
 	return h
-
 }
 
 func (h Hex) String() string {
 	return fmt.Sprintf("(%d,%d)", h.q, h.r)
+}
+
+func (h hex) Coordinates() (int, int, int) {
+	return h.q, h.r, h.s
+}
+
+func (h hex) Q() int {
+	return h.q
+}
+
+func (h hex) R() int {
+	return h.r
+}
+
+func (h hex) S() int {
+	return h.s
 }
 
 // fractionHex provides a more precise representation for hexagons when precision is required.
