@@ -23,12 +23,21 @@ var OrientationFlat Orientation = Orientation{3. / 2., 0., math.Sqrt(3.) / 2., m
 
 // HexToPixel returns the center pixel for a given hexagon an a certain layout
 func HexToPixel(l Layout, h Hex) Point {
-
 	M := l.Orientation
 	size := l.Size
 	origin := l.Origin
 	x := (M.f0*float64(h.q) + M.f1*float64(h.r)) * size.X
 	y := (M.f2*float64(h.q) + M.f3*float64(h.r)) * size.Y
+	return Point{x + origin.X, y + origin.Y}
+}
+
+// FractionalHexToPixel returns the center pixel for a given hexagon an a certain layout
+func FractionalHexToPixel(l Layout, h fractionalHex) Point {
+	M := l.Orientation
+	size := l.Size
+	origin := l.Origin
+	x := (M.f0*h.q + M.f1*h.r) * size.X
+	y := (M.f2*h.q + M.f3*h.r) * size.Y
 	return Point{x + origin.X, y + origin.Y}
 }
 
