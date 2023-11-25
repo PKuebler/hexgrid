@@ -59,19 +59,19 @@ func (h Hex) String() string {
 	return fmt.Sprintf("(%d,%d)", h.q, h.r)
 }
 
-func (h hex) Coordinates() (int, int, int) {
+func (h Hex) Coordinates() (int, int, int) {
 	return h.q, h.r, h.s
 }
 
-func (h hex) Q() int {
+func (h Hex) Q() int {
 	return h.q
 }
 
-func (h hex) R() int {
+func (h Hex) R() int {
 	return h.r
 }
 
-func (h hex) S() int {
+func (h Hex) S() int {
 	return h.s
 }
 
